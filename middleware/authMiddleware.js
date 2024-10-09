@@ -4,7 +4,10 @@ const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization');
 
   if (!token) {
-    return res.status(401).json({ msg: 'No token, authorization denied' });
+    return res.status(401).json({
+      "status": "error",
+      "message": "unauthorized. you are not authorized to access"
+    });
   }
 
   try {
@@ -12,7 +15,10 @@ const authMiddleware = (req, res, next) => {
     req.userId = decoded.userId;
     next();
   } catch (error) {
-    return res.status(401).json({ msg: 'Token is not valid' });
+    return res.status(401).json({
+      "status": "error",
+      "message": "unauthorized. Invalid token"
+    });
   }
 };
 
