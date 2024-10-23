@@ -28,6 +28,7 @@ exports.getUserInfo = async (req, res) => {
 
 exports.registerUser = async (req, res) => {
   const { full_name, username, email, password, phone_number, is_active } = req.body;
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   if (!full_name || !username || !email || !password || !phone_number || !is_active) {
     return res.status(400).json({
